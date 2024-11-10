@@ -1,0 +1,56 @@
+/* 行列表 */
+.nx_line {
+  margin: 20rpx;
+}
+.nx_line_title {
+  padding: 20rpx;
+  color: #666;
+  font-weight: bold;
+  font-size: 35rpx;
+  background-color: white;
+  border-bottom: 1px solid #eee;
+  border-radius: 10rpx 10rpx 0 0;
+}
+.nx_line_list {
+  background-color: white;
+  border-radius: 0 0 10rpx 10rpx;
+}
+.nx_line_list .nx_line_item {
+  width: 100%;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.nx_line_left {
+  flex: 2;
+  display: flex;
+  align-items: center;
+}
+.nx_line_mid {
+  flex: 5;
+  padding: 0 40rpx;
+}
+.nx_line_right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+}
+.nx_line_left image {
+  width: 100%;
+  height: 140rpx;
+}
+.nx_line_left text {
+  width: 80%;
+  margin-left: 20rpx;
+  color: #666;
+}
+.btn {
+  font-size: 28rpx;
+  border: 1rpx solid #ccc;
+  padding: 10rpx 20rpx;
+  border-radius: 30rpx;
+  background-color: #eee;
+  margin: 0 10rpx;
+}

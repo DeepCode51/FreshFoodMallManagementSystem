@@ -1,0 +1,14 @@
+<view class="login_title">欢迎登陆</view>
+<view class="inputView">
+  <input class="imput_text" value="{{username}}" bindinput="onName" type="text" placeholder="请输入用户名" />
+</view>
+<view class="inputView">
+  <input class="imput_text" value="{{password}}" bindinput="onPassword" password type="text" placeholder="请输入密码" />
+</view>
+
+ <!--按钮-->
+ <view class="loginBtnView"> 
+  <button class="loginBtn" type="primary" bindtap="login">登录</button> 
+ </view> 
+
+

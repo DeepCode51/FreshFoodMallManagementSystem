@@ -1,0 +1,24 @@
+<!--pages/search/index.wxml-->
+<view>
+  <input style="background-color: #fff; margin: 20rpx; padding: 20rpx; border-radius: 10rpx;" placeholder="请输入你有搜索的内容" value="{{searchValue}}" bindinput="searchValueInput" />
+
+  <view style="margin: 20rpx; padding: 20rpx; background-color: #fff; " wx:if="{{ goodsList.length }}">
+    <view class="nx_line">
+    <view class="nx_line_list">
+        <navigator class="nx_line_item" wx:for="{{goodsList}}" wx:for-item="item" wx:key="id" url="/pages/goodsInfo/index?id={{item.id}}">
+            <view style="flex:1">
+                <image style="height: 260rpx" mode="scaleToFill" src="{{item.url}}"></image>
+            </view>
+            <view style="flex:1; padding: 0 30rpx; position: relative">
+                <view class="nx_item_name">{{item.name}}</view>
+                <view>{{item.description}}</view>
+                <view style="position: absolute; bottom: 10rpx">
+                    <text style="color:red">￥{{item.price}}</text>
+                    <text style="margin-left: 30rpx">已售{{item.sales}}件</text>
+                </view>
+            </view>
+        </navigator>
+    </view>
+</view>
+  </view>
+</view>

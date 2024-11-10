@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="content-type" content="no-cache, must-revalidate" />
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"/>
+    <title>订单信息</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/font-awesome.css" rel="stylesheet"/>
+    <link href="../css/basic.css" rel="stylesheet"/>
+    <link href="../css/custom.css" rel="stylesheet"/>
+    <link href="../css/element/index.css" rel="stylesheet"/>
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper" v-cloak>
+    <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">商城后台管理系统</a>
+        </div>
+
+        <div class="header-right">
+            <a href="javascript:void(0)" class="btn btn-info" @click="logout" title="退出登录">
+                <i class="fa fa-sign-out fa-2x"></i>
+            </a>
+        </div>
+
+        <div class="header-right">
+            <a href="accountUserInfo.html" class="btn btn-info" title="跳转到个人信息">
+                <i class="fa fa-user fa-2x"></i>
+            </a>
+        </div>
+
+        <div class="header-right" style="padding-top: 25px">欢迎你，{{ user.name }}</div>
+
+        <div class="header-left">
+            <a href="/front/index.html" class="btn btn-info" title="跳转到首页">
+                <i class="fa fa-dot-circle-o fa-2x"></i>
+            </a>
+        </div>
+    </nav>
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="index.html"><i class="fa fa-dashboard "></i>系统首页</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-yelp "></i>信息展示 <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in">
+                        <li>
+                            <a href="userInfo.html"><i class="fa fa-table"></i>用户信息</a>
+                        </li>
+
+                        <li>
+                            <a href="typeInfo.html"><i class="fa fa-table"></i>商品类别</a>
+                        </li>
+                        <li>
+                            <a href="goodsInfo.html"><i class="fa fa-table"></i>商品详情</a>
+                        </li>
+                        <li>
+                            <a class="active-menu" href="orderInfo.html"><i class="fa fa-table"></i>订单信息</a>
+                        </li>
+
+
+                        <li>
+                            <a href="commentInfo.html"><i class="fa fa-table"></i>评论信息</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="accountUserInfo.html"><i class="fa fa-user"></i>个人信息</a>
+                </li>
+                <li>
+                    <a href="updatePassword.html"><i class="fa fa-unlock-alt"></i>修改密码</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" @click="logout"><i class="fa fa-power-off"></i>退出登录</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            订单信息表
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <div class="nx-table-header">
+                                </div>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+										<th>订单编号</th>
+										<th>总价格</th>
+										<th>创建用户</th>
+										<th>收货人</th>
+										<th>收货地址</th>
+										<th>联系电话</th>
+										<th>订单状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody v-for="obj in objs">
+                                    <tr>
+                                        <td>{{obj.id}}</td>
+										<td>{{obj.orderId}}</td>
+										<td>{{obj.totalPrice}}</td>
+										<td>{{obj.userInfo.name}}</td>
+										<td>{{obj.linkMan}}</td>
+										<td>{{obj.linkAddress}}</td>
+										<td>{{obj.linkPhone}}</td>
+										<td>{{obj.status}}</td>
+                                        <td>
+                                            <button v-if="obj.status === '待发货'" class="btn btn-primary btn-xs" v-on:click="changeStatus(obj.id, '待确认')">发货</button>
+                                            <button v-if="obj.status === '申请退款中'" class="btn btn-primary btn-xs" v-on:click="changeStatus(obj.id, '已退款')">退款</button>
+                                            <button v-if="obj.status === '申请退货中'" class="btn btn-primary btn-xs" v-on:click="changeStatus(obj.id, '已退餐')">退货</button>
+                                            <button class="btn btn-danger btn-xs" v-on:click="del(obj.id)">删除</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item" v-bind:class="{ disabled: preActive }">
+                                            <a class="page-link" href="javascript:void(0)"
+                                               v-on:click="loadTable(pageInfo.pageNum - 1)">上一页</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:void(0)" v-if="pageInfo.pageNum > 1" v-on:click="loadTable(pageInfo.pageNum - 1)">{{pageInfo.pageNum - 1}}</a>
+                                        </li>
+                                        <li class="page-item disabled">
+                                            <a class="page-link" aria-disabled="true" href="javascript:void(0)">{{pageInfo.pageNum}}</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="javascript:void(0)" v-if="pageInfo.hasNextPage" v-on:click="loadTable(pageInfo.pageNum + 1)">{{pageInfo.pageNum + 1}}</a>
+                                        </li>
+                                        <li class="page-item" v-bind:class="{ disabled: nextActive }">
+                                            <a class="page-link" href="javascript:void(0)" v-on:click="loadTable(pageInfo.hasNextPage? (pageInfo.pageNum + 1) : pageInfo.pageNum)">下一页</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.metisMenu.js"></script>
+<script src="../js/custom.js"></script>
+<script src="../js/my.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script src="../js/element/index.js"></script>
+
+<script>
+    function msg(type, msg) {
+        Vue.prototype.$message({
+            type: type, // success（成功）、warning（警告）, error(错误)
+            message: msg,
+            duration: 2000,
+            offset: 100,
+            center: true
+        })
+    }
+
+    new Vue({
+        el: '#wrapper',
+        data: {
+            user: {},
+
+            objs: [],
+            pageInfo: {},
+            preActive: true,
+            nextActive: true,
+            entity: {}
+        },
+        created: function () {
+            this.user = JSON.parse(localStorage.getItem('user'));
+            this.loadTable(1);
+        },
+        methods: {
+            loadTable(pageNum) {
+                axios.get("/orderInfo/page?userId=" + this.user.id + "&pageNum=" + pageNum).then(res => {
+                    if (res.data.code === '0') {
+                        this.objs = res.data.data.list;
+                        this.pageInfo = res.data.data;
+                        this.preActive = !(this.pageInfo.hasPreviousPage);
+                        this.nextActive = !(this.pageInfo.hasNextPage);
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+            },
+            del(id) {
+                if (this.user.level !== 1) {
+                    msg('warning', '你没有权限操作');
+                    return;
+                }
+                let _this = this;
+                this.$confirm('确认删除？', '系统提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'btn-custom-cancel',
+                    type: 'warning'
+                }).then(function(){
+                    axios.delete("/orderInfo/" + id).then(res => {
+                        if (res.data.code === '0') {
+                            msg('success', '删除成功');
+                            _this.loadTable(1);
+                        } else {
+                            msg('error', res.data.msg);
+                        }
+                    });
+                }).catch(function() {
+                    console.log("取消成功！");
+                });
+            },
+            changeStatus(id, status) {
+                axios.post('/orderInfo/status/' + id + '/' + status).then(res => {
+                    if (res.data.code === '0') {
+                        this.loadTable(1);
+                    } else {
+                        alert(res.data.msg);
+                    }
+                })
+            },
+            logout() {
+                logout();
+            }
+        }
+    })
+</script>
+</body>
+</html>

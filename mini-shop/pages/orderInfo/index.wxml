@@ -1,0 +1,34 @@
+<!-- 行列表开始 -->
+  <view class="nx_line">
+    <view class="nx_line_list">
+      <block wx:if="{{dataList.length !== 0}}">
+         <view class="nx_line_item" wx:for="{{dataList}}" wx:for-item="item" wx:key="id">
+        <navigator style="display: flex;" url="/pages/orderDetail/index?id={{item.id}}&status={{item.status}}">
+          <view class="nx_line_left" >
+            <image mode="scaleToFill" src="{{item.url}}"></image>
+          </view>
+          <view class="nx_line_mid">
+            <view style="color: #000; padding: 15rpx 0">订单编号：{{item.orderId}}</view>
+            <view style="padding-top: 20rpx">订单状态：{{item.status}}</view>
+          </view>
+          <view class="nx_line_right">
+            <text style="color: red">￥{{item.totalPrice}}</text>
+            <text>共{{item.count}}件</text>
+          </view>
+        </navigator>
+       
+        <view style="text-align: right; padding: 40rpx 0 20rpx 0;">
+          <text wx:if="{{item.status === '待付款'}}" data-id="{{item.id}}" data-status="{{'待发货'}}" class="btn" style="background-color: var(--themeColor); color: #fff" bindtap="payGoods">付款</text>
+          <text wx:if="{{item.status === '待付款'}}" data-id="{{item.id}}" data-status="{{'已取消'}}" class="btn" bindtap="payGoods">取消</text>
+          <text wx:if="{{item.status === '完成'}}" data-id="{{item.id}}" data-status="{{'申请退款中'}}" class="btn" bindtap="payGoods">退款</text>
+          <text wx:if="{{item.status === '待确认'}}" data-id="{{item.id}}" data-status="{{'完成'}}" class="btn" style="background-color: var(--themeColor); color: #fff" bindtap="payGoods">确认</text>
+          <text wx:if="{{item.status === '已退款' || item.status === '完成' || item.status === '已取消'}}" class="btn" style="background-color: red; color: #fff" data-id="{{item.id}}" bindtap="deleteOrder">删除</text>
+        </view>
+      </view>
+      </block>
+      <block wx:else>
+      <image mode="widthFix" src="http://hbimg.b0.upaiyun.com/e1b1467beea0a9c7d6a56b32bac6d7e5dcd914f7c3e6-YTwUd6_fw658" ></image>
+    </block>
+    </view>
+  </view>
+  <!-- 行列表结束 -->

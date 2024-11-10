@@ -1,0 +1,28 @@
+/* 在微信小程序中 不支持 通配符 '*' */
+page,view,text,swiper,swiper-item,image,navigator{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/*
+ 主题颜色 通过变量来实现 
+ 1 less 中 存在 变量这个知识
+ 2 原生的css和wxss也是支持 变量 
+ */
+ page{
+  /* 定义主题颜色 */
+  --themeColor:#0094ff;
+  background-color: #eee;
+  color: #666;
+  /*
+   定义统一字体大小  假设设计稿 大小是 375px 
+   1px= 2rpx
+   14px = 28rpx
+    */
+    font-size: 28rpx;
+}
+
+image{
+  width: 100%;
+}

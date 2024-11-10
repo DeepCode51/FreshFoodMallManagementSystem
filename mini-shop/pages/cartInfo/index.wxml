@@ -1,0 +1,50 @@
+<!-- 购物车内容 -->
+<view class="cart_content">
+  <view class="cart_title">哪些是我想买的？</view>
+  <view class="cart_main">
+    <!-- 当cart数组 长度不为0 显示 商品信息 -->
+    <block wx:if="{{cart.length!==0}}">
+        <view class="cart_item"
+      wx:for="{{cart}}"
+      wx:key="goods_id"
+      >
+          <!-- 商品图片 -->
+          <navigator class="cart_img_wrap">
+          <image style="height: 150rpx" src="{{item.url}}" ></image>
+          </navigator>
+          <!-- 商品信息 -->
+          <view class="cart_info_wrap">
+            <view class="goods_name">{{item.name}}</view>
+            <view class="goods_price_wrap">
+              <view class="goods_price">￥{{item.price}}</view>
+              <view class="cart_num_tool">
+                <view bindtap="handleItemNumEdit" data-id="{{item.id}}" data-operation="{{-1}}"  class="num_edit">-</view>
+                <view class="goods_num">{{item.count}}</view>
+                <view bindtap="handleItemNumEdit" data-id="{{item.id}}" data-operation="{{1}}"  class="num_edit">+</view>
+              </view>
+            </view>
+          </view>
+        </view>
+    </block>
+    <block wx:else>
+      <image mode="widthFix" src="http://hbimg.b0.upaiyun.com/e1b1467beea0a9c7d6a56b32bac6d7e5dcd914f7c3e6-YTwUd6_fw658" ></image>
+    </block>
+  </view>
+</view>
+
+<!-- 底部工具栏 -->
+<view class="footer_tool">
+  <!-- 总价格 -->
+  <view class="total_price_wrap">
+    <view class="total_price">
+      合计: <text class="total_price_text">￥{{totalPrice}}</text>
+      <text style="margin-left: 30rpx">(包含运费)</text>
+      <view>共 <text style="color: var(--themeColor)">{{totalNum}}</text> 件</view>
+      </view>
+    <view></view>
+  </view>
+  <!-- 结算 -->
+  <view class="order_pay_wrap" bindtap="handlePay" >
+    提交订单
+  </view>
+</view>

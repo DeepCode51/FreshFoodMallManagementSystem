@@ -1,0 +1,58 @@
+page {
+  padding-bottom: 100rpx;
+}
+
+/* 轮播图 */
+.nx_swiper swiper {
+  width: 750rpx;
+  height: 400rpx;
+}
+.nx_swiper swiper image {
+  width: 750rpx;
+  height: 400rpx;
+}
+
+.nx_detail_main {
+  padding: 20rpx;
+}
+.nx_detail_main_item {
+  background-color: white;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #ccc;
+  display: flex;
+}
+
+.nx_detail_main_item_left {
+  flex: 2
+}
+
+.nx_detail_main_item_right {
+  flex: 8
+}
+
+.footer_tool {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90rpx;
+  background-color: #fff;
+  display: flex;
+  border-top: 1rpx solid #ccc;
+}
+
+.footer_tool .order_pay_wrap {
+  flex: 3;
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nx_praice {
+  background-color: red;
+}
+.nx_store {
+  background-color: orange;
+}

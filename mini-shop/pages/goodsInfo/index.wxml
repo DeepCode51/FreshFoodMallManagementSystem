@@ -1,0 +1,72 @@
+<view class="nx_detail">
+  <!-- 轮播图开始 -->
+  <view class="nx_swiper">
+    <swiper autoplay indicator-dots circular>
+      <swiper-item wx:for="{{swiperList}}" wx:key="item">
+        <navigator>
+          <image src="{{item.imgSrc}}"></image>
+        </navigator>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 轮播图结束 -->
+
+  <view class="nx_detail_main">
+    <view class="nx_detail_main_item">
+      <view class="nx_detail_main_item_left">名称</view>
+      <view class="nx_detail_main_item_right">{{obj.name}}</view>
+    </view>
+    <view class="nx_detail_main_item">
+      <view class="nx_detail_main_item_left">描述</view>
+      <view class="nx_detail_main_item_right">{{obj.description}}</view>
+    </view>
+    <view class="nx_detail_main_item">
+      <view class="nx_detail_main_item_left">价格</view>
+      <view class="nx_detail_main_item_right" style="color:red">￥{{obj.price}}</view>
+    </view>
+    <view class="nx_detail_main_item">
+      <view class="nx_detail_main_item_left">折扣</view>
+      <view class="nx_detail_main_item_right">{{obj.discount}}</view>
+    </view>
+    <view class="nx_detail_main_item">
+      <view class="nx_detail_main_item_left">销量</view>
+      <view class="nx_detail_main_item_right">{{obj.sales}}</view>
+    </view>
+  </view>
+
+  <!-- 评价 -->
+  <view>
+    <view style="padding: 20rpx; background-color: #fff; font-size: 35rpx; font-weight: bold;">商品评价</view>
+    <view style="padding: 0 20rpx; background-color: #fff" wx:for="{{commentList}}" wx:key="id">
+      <view style="padding: 20rpx 0; border-top: 1rpx solid #ccc; display: flex">
+        <view style="flex: 2; text-align: center">
+          <image mode="widthFix" src="{{item.url}}" style="width: 50%; margin-top: 10rpx; border-radius: 50%"></image>
+        </view>
+        <view style="flex: 8; padding:10rpx">
+          <view style="display: flex;">
+            <view style="flex: 1; color: #000; font-weight: bold;">{{item.userName}}</view>
+            <view style="flex: 1;text-align: right">{{item.createTime}}</view>
+          </view>
+          <view style="padding-top: 20rpx">
+            {{item.content}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+ 
+   <!-- 评价结束 -->
+
+  <!-- 底部工具栏 -->
+  <view class="footer_tool">
+    <!-- 点赞 -->
+    <!-- <view class="order_pay_wrap nx_praice" bindtap="handleCollect">
+      收藏
+    </view> -->
+    <!-- 收藏 -->
+    <view class="order_pay_wrap nx_store" bindtap="handleCartAdd">
+      加入购物车
+    </view>
+  </view>
+  
+</view>

@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="content-type" content="no-cache, must-revalidate" />
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"/>
+    <title>个人信息</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/font-awesome.css" rel="stylesheet"/>
+    <link href="../css/basic.css" rel="stylesheet"/>
+    <link href="../css/custom.css" rel="stylesheet"/>
+    <link href="../css/element/index.css" rel="stylesheet"/>
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper" v-cloak>
+    <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">商城后台管理系统</a>
+        </div>
+
+        <div class="header-right">
+            <a href="javascript:void(0)" class="btn btn-info" @click="logout" title="退出登录">
+                <i class="fa fa-sign-out fa-2x"></i>
+            </a>
+        </div>
+
+        <div class="header-right">
+            <a href="accountUserInfo.html" class="btn btn-info" title="跳转到个人信息">
+                <i class="fa fa-user fa-2x"></i>
+            </a>
+        </div>
+
+        <div class="header-right" style="padding-top: 25px">欢迎你，{{ user.name }}</div>
+
+        <div class="header-left">
+            <a href="/front/index.html" class="btn btn-info" title="跳转到首页">
+                <i class="fa fa-dot-circle-o fa-2x"></i>
+            </a>
+        </div>
+    </nav>
+    <nav class="navbar-default navbar-side" role="navigation">
+		<div class="sidebar-collapse">
+			<ul class="nav" id="main-menu">
+				<li>
+					<a href="index.html"><i class="fa fa-dashboard "></i>系统首页</a>
+				</li>
+				<li>
+					<a href="#"><i class="fa fa-yelp "></i>信息展示 <span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level collapse in">
+						<li>
+							<a href="userInfo.html"><i class="fa fa-table"></i>用户信息</a>
+						</li>
+						<li>
+							<a href="typeInfo.html"><i class="fa fa-table"></i>商品类别</a>
+						</li>
+						<li>
+							<a href="goodsInfo.html"><i class="fa fa-table"></i>商品详情</a>
+						</li>
+						<li>
+							<a href="orderInfo.html"><i class="fa fa-table"></i>订单信息</a>
+						</li>
+
+						<li>
+							<a href="commentInfo.html"><i class="fa fa-table"></i>评论信息</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a class="active-menu" href="accountUserInfo.html"><i class="fa fa-user"></i>个人信息</a>
+				</li>
+				<li>
+					<a href="updatePassword.html"><i class="fa fa-unlock-alt"></i>修改密码</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" @click="logout"><i class="fa fa-power-off"></i>退出登录</a>
+				</li>
+			</ul>
+		</div>
+    </nav>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            个人信息
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal">
+                                <input type="hidden" v-model="entity.id">
+								<div class="form-group">
+									<label class="col-sm-3 control-label">姓名</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" v-model="entity.name" placeholder="请输入姓名">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">昵称</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" v-model="entity.nickname" placeholder="请输入昵称">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">性别</label>
+									<div class="col-sm-7">
+										<label class="radio-inline">
+											<input type="radio" value="男" v-model="entity.sex">男
+										</label>
+										<label class="radio-inline">
+											<input type="radio" value="女" v-model="entity.sex">女
+										</label>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">年龄</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" v-model="entity.age" placeholder="请输入年龄">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">手机号</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" v-model="entity.phone" placeholder="请输入手机号">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">地址</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" v-model="entity.address" placeholder="请输入地址">
+									</div>
+								</div>
+                            </form>
+                            <div style="text-align: center">
+                                <button type="button" class="btn btn-primary" v-on:click="update()">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.metisMenu.js"></script>
+<script src="../js/custom.js"></script>
+<script src="../js/my.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script src="../js/element/index.js"></script>
+
+<script>
+    function msg(type, msg) {
+        Vue.prototype.$message({
+            type: type, // success（成功）、warning（警告）, error(错误)
+            message: msg,
+            duration: 2000,
+            offset: 100,
+            center: true,
+            user: {}
+        })
+    }
+
+    new Vue({
+        el: '#wrapper',
+        data: {
+            authority: [],
+            entity: {
+                sex: '男'
+            }
+        },
+        created: function () {
+			this.user = JSON.parse(localStorage.getItem('user'));
+            this.loadData();
+        },
+        methods: {
+            loadData() {
+                axios.get("/userInfo/" + this.user.id).then(res => {
+                    if (res.data.code === '0') {
+                        this.entity = res.data.data;
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+            },
+            update() {
+                if (checkValid(this.entity)) {
+                    axios.put("/userInfo", this.entity).then(res => {
+                        if (res.data.code === '0') {
+                            msg('success', '更新成功');
+                            this.loadData();
+                        } else {
+                            msg('error', res.data.msg);
+                        }
+                    })
+                }
+            },
+            logout() {
+                logout();
+            }
+        }
+    })
+</script>
+</body>
+</html>

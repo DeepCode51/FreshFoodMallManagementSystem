@@ -1,0 +1,48 @@
+<view class="user_info_wrap">
+  <view wx:if="{{isLogin === 1}}" class="user_img_wrap">
+    <image class="user_bg" src="../../imgs/head.jpg" ></image>
+    <view class="user_info">
+      <image class="user_icon" src="../../imgs/head.jpg"></image>
+      <view class="user_name">{{userinfo.name}}</view>
+    </view>
+  </view>
+  <view wx:else class="user_btn">
+    <navigator url="/pages/login/index?isTabBar=1&url=/pages/user/index" >登录</navigator>
+  </view>
+</view>
+<view class="user_content">
+  
+  <view class="user_main">
+    <!-- 我的订单 -->
+    <view class="orders_wrap">
+      <view class="orders_title">我的订单</view>
+      <view class="order_content">
+        <view class="navigator" bindtap="navigateToOrder" data-status="all">
+          <view class="iconfont icon-ding_dan"></view>
+          <view class="order_name">全部订单</view>
+        </view>
+        <view class="navigator" bindtap="navigateToOrder" data-status="待付款">
+          <view class="iconfont icon-fukuantongzhi"></view>
+          <view class="order_name">待付款</view>
+        </view>
+        <view class="navigator" bindtap="navigateToOrder" data-status="待确认">
+          <view class="iconfont icon-receipt-address"></view>
+          <view class="order_name">待确认</view>
+        </view>
+        <view class="navigator" bindtap="navigateToOrder" data-status="完成">
+          <view class="iconfont icon-tuihuotuikuan_dianpu"></view>
+          <view class="order_name">退款/退货</view>
+        </view>
+      </view>
+    </view>
+    <!-- 应用信息相关 -->
+    <view class="app_info_wrap">
+      <view class="app_info_item app_info_contact">
+        <text>联系客服</text>
+        <text>400-618-4000</text>
+      </view>
+      <view class="app_info_item">关于我们</view>
+      <view class="app_info_item navigator" bindtap="recharge">充值（当前余额：￥{{price}}）</view>
+    </view>
+  </view>
+</view>

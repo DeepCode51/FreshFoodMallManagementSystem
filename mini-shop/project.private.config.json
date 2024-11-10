@@ -1,0 +1,37 @@
+{
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "详情页",
+          "pathName": "pages/info_detail/index",
+          "query": "id=4",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "个人中心",
+          "pathName": "pages/user/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "搜索",
+          "pathName": "pages/search/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+/* pages/login/index.wxss */
+.login_title {
+  font-size: 40rpx;
+  color: crimson;
+  text-align: center;
+  margin-top: 50rpx;
+  margin-bottom: 80rpx;
+}
+
+.inputView { 
+  line-height: 44px; 
+ } 
+
+.imput_text {
+  margin: 50rpx;
+  text-align: center; 
+  color: #cccccc; 
+  font-size: 15px;
+  border: 1rpx solid #cccccc;
+  padding: 15rpx;
+  border-radius: 10rpx;
+}

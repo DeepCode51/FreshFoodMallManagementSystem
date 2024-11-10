@@ -1,0 +1,232 @@
+﻿
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="content-type" content="no-cache, must-revalidate" />
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"/>
+    <title>home</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/font-awesome.css" rel="stylesheet"/>
+    <link href="../css/basic.css" rel="stylesheet"/>
+    <link href="../css/custom.css" rel="stylesheet"/>
+    <link href="../css/my.css" rel="stylesheet"/>
+    <link href="../css/element/index.css" rel="stylesheet"/>
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<div id="wrapper" v-cloak>
+    <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">商城后台管理系统</a>
+        </div>
+
+        <div class="header-right">
+            <a href="javascript:void(0)" class="btn btn-info" @click="logout" title="退出登录">
+                <i class="fa fa-sign-out fa-2x"></i>
+            </a>
+        </div>
+
+        <div class="header-right">
+            <a href="accountUserInfo.html" class="btn btn-info" title="跳转到个人信息">
+                <i class="fa fa-user fa-2x"></i>
+            </a>
+        </div>
+
+        <div class="header-right" style="padding-top: 25px">欢迎你，{{ user.name }}</div>
+
+<!--        <div class="header-left">-->
+<!--            <a href="/front/index.html" class="btn btn-info" title="跳转到首页">-->
+<!--                <i class="fa fa-dot-circle-o fa-2x"></i>-->
+<!--            </a>-->
+<!--        </div>-->
+    </nav>
+    <!-- /. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a class="active-menu" href="index.html"><i class="fa fa-dashboard "></i>系统首页</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-yelp "></i>信息展示 <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse in">
+						<li>
+							<a href="userInfo.html"><i class="fa fa-table"></i>用户信息</a>
+						</li>
+
+						<li>
+							<a href="typeInfo.html"><i class="fa fa-table"></i>商品类别</a>
+						</li>
+						<li>
+							<a href="goodsInfo.html"><i class="fa fa-table"></i>商品详情</a>
+						</li>
+						<li>
+							<a href="orderInfo.html"><i class="fa fa-table"></i>订单信息</a>
+						</li>
+
+
+						<li>
+							<a href="commentInfo.html"><i class="fa fa-table"></i>评论信息</a>
+						</li>
+                    </ul>
+                </li>
+				<li>
+					<a href="accountUserInfo.html"><i class="fa fa-user"></i>个人信息</a>
+				</li>
+                <li>
+                    <a href="updatePassword.html"><i class="fa fa-unlock-alt"></i>修改密码</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)" @click="logout"><i class="fa fa-power-off"></i>退出登录</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="main-box mb-olivedrab">
+                        <i class="fa fa-user"></i><span style="margin-left: 20px;">用户总数：{{ totalUser }}</span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="main-box mb-darkseagreen">
+                        <i class="fa fa-comment"></i><span style="margin-left: 20px;">评论总数：{{ totalComment }}</span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="main-box mb-burlywood">
+                        <i class="fa fa-rmb"></i><span style="margin-left: 20px;">总交易额：{{ totalPrice }}</span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="main-box mb-cadetblue">
+                        <i class="fa fa-shopping-cart"></i><span style="margin-left: 20px;">总销量：{{ totalShopping }}</span>
+					</div>
+				</div>
+			</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <select @change="selectEchartsType" v-model="echartsType">
+                                <option value="pie">饼图</option>
+                                <option value="bar">柱状图</option>
+                            </select>
+                        </div>
+                        <div class="panel-body">
+                            <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="left" style="width: 100%;height:400px;"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="right" style="width: 100%;height:400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.metisMenu.js"></script>
+<script src="../js/custom.js"></script>
+<script src="../js/my.js"></script>
+<script src="../js/vue2.6.11/vue.min.js"></script>
+<script src="../js/vue2.6.11/axios.js"></script>
+<script src="../js/echarts.min.js"></script>
+<script src="../js/element/index.js"></script>
+
+<script>
+
+    new Vue({
+        el: "#wrapper",
+        data: {
+            user: {},
+            totalUser: 0,
+            totalComment: 0,
+            totalPrice: 0,
+            totalShopping: 0,
+            echartsShowLeftArr: [],
+            echartsShowRightArr: [],
+            echartsType: 'pie'
+        },
+        created: function () {
+            this.user = JSON.parse(localStorage.getItem("user"));
+            axios.get("/echarts/getTotal").then(res => {
+                if (res.data.code === '0') {
+                    let map = res.data.data;
+                    this.totalUser = map['totalUser'];
+                    this.totalComment = map['totalComment'];
+                    this.totalPrice = map['totalPrice'];
+                    this.totalShopping = map['totalShopping'];
+                }
+            });
+
+            this.drawLine();
+        },
+        methods: {
+            drawLine() {
+                axios.get('/echarts/get/price').then(res => {
+                    // 基于准备好的dom，初始化echarts实例
+                    this.echartsShowLeftArr = res.data.data;
+                    if (this.echartsShowLeftArr.length) {
+                        let myChart = echarts.init(document.getElementById('left'));
+                        let option = this.getEchartsType(this.echartsShowLeftArr, this.echartsType);
+                        myChart.setOption(option, true);
+                    }
+                });
+                axios.get('/echarts/get/shopping').then(res => {
+                    // 基于准备好的dom，初始化echarts实例
+                    this.echartsShowRightArr = res.data.data;
+                    if (this.echartsShowRightArr.length) {
+                        let myChart = echarts.init(document.getElementById('right'));
+                        let option = this.getEchartsType(this.echartsShowRightArr, this.echartsType);
+                        myChart.setOption(option, true);
+                    }
+                });
+            },
+            selectEchartsType() {
+                let leftChart = echarts.init(document.getElementById('left'));
+                let leftOption = this.getEchartsType(this.echartsShowLeftArr, this.echartsType);
+                leftChart.setOption(leftOption, true);
+
+                let rightChart = echarts.init(document.getElementById('right'));
+                let rightOption = this.getEchartsType(this.echartsShowRightArr, this.echartsType);
+                rightChart.setOption(rightOption, true);
+            },
+            getEchartsType(echartsArr, type) {
+                for (let item of echartsArr) {
+                    if (item.series[0].type === type) {
+                        return item;
+                    }
+                }
+            },
+            logout() {
+                logout();
+            }
+        }
+    });
+
+
+</script>
+
+</body>
+</html>

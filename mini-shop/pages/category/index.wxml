@@ -1,0 +1,40 @@
+<view class="cates">
+<!-- 轮播图开始 -->
+<view class="nx_swiper">
+    <swiper autoplay indicator-dots circular interval="2000">
+        <swiper-item wx:for="{{goodsInfoList}}" wx:key="id">
+            <navigator url="/pages/goodsInfo/index?id={{item.id}}">
+                <image src="{{item.url}}"></image>
+            </navigator>
+        </swiper-item>
+    </swiper>
+</view>
+<!-- 轮播图结束 -->
+    <view class="cates_container">
+        <!-- 左侧菜单 -->
+        <scroll-view scroll-y class="left_menu">
+            <view
+                    class="menu_item {{item.id===currentIndex?'active':''}}"
+                    wx:for="{{leftMenuList}}"
+                    wx:key="*this"
+                    bindtap="handleItemTap" data-id="{{item.id}}"
+            >
+                {{item.name}}
+            </view>
+        </scroll-view>
+        <!-- 右侧商品内容 -->
+        <scroll-view scroll-top="{{scrollTop}}" scroll-y class="right_content">
+            <view class="goods_list">
+                <navigator style="width: 33.3%;"
+                           wx:for="{{rightContent}}"
+                           wx:key="id"
+                           url="/pages/goodsInfo/index?id={{item.id}}"
+                >
+                    <image style="height: 160rpx" src="{{item.imgSrc}}"></image>
+                    <view style="display: -webkit-box;overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2;">{{item.name}}</view>
+                </navigator>
+            </view>
+        </scroll-view>
+    </view>
+
+</view>

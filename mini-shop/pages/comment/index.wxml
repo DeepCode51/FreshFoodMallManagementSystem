@@ -1,0 +1,9 @@
+<view class="login_title">商品评价</view>
+<view class="inputView">
+  <input class="imput_text" value="{{recharge}}" bindinput="onComment" type="text" placeholder="请输入评价" />
+</view>
+
+ <!--按钮-->
+ <view class="loginBtnView"> 
+  <button class="loginBtn" type="primary" bindtap="comment">提交</button> 
+ </view> 
